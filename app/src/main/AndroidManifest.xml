@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".WelcomeScreen"
@@ -19,6 +20,7 @@
         <activity
             android:name=".ViewSquadsActivity"
             android:label="@string/title_activity_view_squads"
+            android:screenOrientation="portrait"
             android:parentActivityName=".WelcomeScreen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -27,6 +29,7 @@
         <activity
             android:name=".BuildSquadActivity"
             android:label="@string/title_activity_build_squad"
+            android:screenOrientation="portrait"
             android:parentActivityName=".WelcomeScreen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -35,6 +38,7 @@
         <activity
             android:name=".SquadListView"
             android:label="@string/title_activity_squad_list_view"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ViewSquadsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +47,7 @@
         <activity
             android:name=".SelectedSquadList"
             android:label="@string/title_activity_selected_squad_list"
+            android:screenOrientation="portrait"
             android:parentActivityName=".SquadListView" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,10 +56,20 @@
         <activity
             android:name=".SelectFormation"
             android:label="@string/title_activity_select_formation"
+            android:screenOrientation="portrait"
             android:parentActivityName=".SquadListView" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahulchandrashekhar.footywiz.SquadListView" />
+        </activity>
+        <activity
+            android:name=".SquadBuilder"
+            android:label="@string/title_activity_squad_builder"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SelectFormation" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahulchandrashekhar.footywiz.SelectFormation" />
         </activity>
     </application>
 

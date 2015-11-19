@@ -42,12 +42,15 @@ public class SelectFormation extends AppCompatActivity {
                 // ListView Clicked item value
                 String itemValue = (String) listView.getItemAtPosition(position);
 
+                Intent myIntent = new Intent(SelectFormation.this, SquadBuilder.class);
+                SelectFormation.this.startActivity(myIntent);
+
 
 
                 //Show Alert
-                Toast.makeText(getApplicationContext(),
+                /*Toast.makeText(getApplicationContext(),
                         "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                        .show();
+                        .show();*/
 
 
             }
