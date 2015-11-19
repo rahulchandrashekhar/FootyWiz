@@ -48,6 +48,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahulchandrashekhar.footywiz.SquadListView" />
         </activity>
+        <activity
+            android:name=".SelectFormation"
+            android:label="@string/title_activity_select_formation"
+            android:parentActivityName=".SquadListView" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahulchandrashekhar.footywiz.SquadListView" />
+        </activity>
     </application>
 
 </manifest>

@@ -24,12 +24,22 @@ public class WelcomeScreen extends AppCompatActivity {
                                          @Override
                                      public void onClick(View v){
                                              Intent myIntent = new Intent(WelcomeScreen.this, ViewSquadsActivity.class);
+                                             myIntent.putExtra("buildOrView","view");
                                              WelcomeScreen.this.startActivity(myIntent);
                                          }
                                       }
         );
 
         Button buildSquad = (Button)findViewById(R.id.build_squad_button);
+
+        buildSquad.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent myIntent = new Intent(WelcomeScreen.this, ViewSquadsActivity.class);
+                myIntent.putExtra("buildOrView", "build");
+                WelcomeScreen.this.startActivity(myIntent);
+            }
+        });
 
 
     }

@@ -16,5 +16,6 @@
     <string name="title_activity_build_squad">BuildSquadActivity</string>
     <string name="title_activity_squad_list_view">SquadListView</string>
     <string name="title_activity_selected_squad_list">SelectedSquadList</string>
+    <string name="title_activity_select_formation">SelectFormation</string>
     
 </resources>

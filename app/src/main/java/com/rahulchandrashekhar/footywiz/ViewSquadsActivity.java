@@ -25,8 +25,11 @@ public class ViewSquadsActivity extends AppCompatActivity {
 
                                           @Override
                                           public void onClick(View v){
+                                              Intent intent = getIntent();
+                                              String value = intent.getStringExtra("buildOrView");
                                               Intent myIntent = new Intent(ViewSquadsActivity.this, SquadListView.class);
                                               myIntent.putExtra("league","england");
+                                              myIntent.putExtra("buildOrView", value);
                                               ViewSquadsActivity.this.startActivity(myIntent);
                                           }
                                       }
@@ -37,8 +40,11 @@ public class ViewSquadsActivity extends AppCompatActivity {
         germanyView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Intent intent = getIntent();
+                String value = intent.getStringExtra("buildOrView");
                 Intent myIntent = new Intent(ViewSquadsActivity.this, SquadListView.class);
                 myIntent.putExtra("league","germany");
+                myIntent.putExtra("buildOrView", value);
                 ViewSquadsActivity.this.startActivity(myIntent);
             }
         });
@@ -48,8 +54,11 @@ public class ViewSquadsActivity extends AppCompatActivity {
         franceView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Intent intent = getIntent();
+                String value = intent.getStringExtra("buildOrView");
                 Intent myIntent = new Intent(ViewSquadsActivity.this, SquadListView.class);
                 myIntent.putExtra("league","france");
+                myIntent.putExtra("buildOrView", value);
                 ViewSquadsActivity.this.startActivity(myIntent);
             }
         });
@@ -59,8 +68,11 @@ public class ViewSquadsActivity extends AppCompatActivity {
         portugalView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Intent intent = getIntent();
+                String value = intent.getStringExtra("buildOrView");
                 Intent myIntent = new Intent(ViewSquadsActivity.this, SquadListView.class);
                 myIntent.putExtra("league","portugal");
+                myIntent.putExtra("buildOrView", value);
                 ViewSquadsActivity.this.startActivity(myIntent);
             }
         });
@@ -70,8 +82,11 @@ public class ViewSquadsActivity extends AppCompatActivity {
         spainView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Intent intent = getIntent();
+                String value = intent.getStringExtra("buildOrView");
                 Intent myIntent = new Intent(ViewSquadsActivity.this, SquadListView.class);
                 myIntent.putExtra("league","spain");
+                myIntent.putExtra("buildOrView", value);
                 ViewSquadsActivity.this.startActivity(myIntent);
             }
         });

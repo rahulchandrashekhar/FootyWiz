@@ -22,6 +22,7 @@ public class SquadListView extends AppCompatActivity {
 
         Intent intent = getIntent();
         String value = intent.getStringExtra("league");
+        final String buildOrView = intent.getStringExtra("buildOrView");
 
         listView = (ListView) findViewById(R.id.list);
 
@@ -43,8 +44,15 @@ public class SquadListView extends AppCompatActivity {
                 // ListView Clicked item value
                 String itemValue = (String) listView.getItemAtPosition(position);
 
-                Intent myIntent = new Intent(SquadListView.this, SelectedSquadList.class);
-                SquadListView.this.startActivity(myIntent);
+                if(buildOrView.equals("view")){
+                    Intent myIntent = new Intent(SquadListView.this, SelectedSquadList.class);
+                    SquadListView.this.startActivity(myIntent);
+                }
+                else{
+                    Intent myIntent = new Intent(SquadListView.this, SelectFormation.class);
+                    SquadListView.this.startActivity(myIntent);
+                }
+
 
                 // Show Alert
                 /*Toast.makeText(getApplicationContext(),
