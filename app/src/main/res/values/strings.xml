@@ -6,4 +6,15 @@
     <string name="welcome_text">Welcome!</string>
     <string name="view_text">View Squads</string>
     <string name="build_text">Build Squad</string>
+    <string name="title_activity_view_squads">ViewSquadsActivity</string>
+    <string name="select_league_text">Select the league</string>
+    <string name="england">English Premier League</string>
+    <string name="spain">La Liga (Spain)</string>
+    <string name="portugal">Primeira Liga (Portugal)</string>
+    <string name="germany">German Bundesliga</string>
+    <string name="france">Ligue 1 (France)</string>
+    <string name="title_activity_build_squad">BuildSquadActivity</string>
+    <string name="title_activity_squad_list_view">SquadListView</string>
+    <string name="title_activity_selected_squad_list">SelectedSquadList</string>
+    
 </resources>

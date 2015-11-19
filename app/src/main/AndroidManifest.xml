@@ -16,6 +16,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ViewSquadsActivity"
+            android:label="@string/title_activity_view_squads"
+            android:parentActivityName=".WelcomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahulchandrashekhar.footywiz.WelcomeScreen" />
+        </activity>
+        <activity
+            android:name=".BuildSquadActivity"
+            android:label="@string/title_activity_build_squad"
+            android:parentActivityName=".WelcomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahulchandrashekhar.footywiz.WelcomeScreen" />
+        </activity>
+        <activity
+            android:name=".SquadListView"
+            android:label="@string/title_activity_squad_list_view"
+            android:parentActivityName=".ViewSquadsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahulchandrashekhar.footywiz.ViewSquadsActivity" />
+        </activity>
+        <activity
+            android:name=".SelectedSquadList"
+            android:label="@string/title_activity_selected_squad_list"
+            android:parentActivityName=".SquadListView" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rahulchandrashekhar.footywiz.SquadListView" />
+        </activity>
     </application>
 
 </manifest>

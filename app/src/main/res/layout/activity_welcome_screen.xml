@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/view_text"
-        android:id="@+id/button"
+        android:id="@+id/view_teams_button"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="113dp"
@@ -32,10 +32,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/build_text"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button"
+        android:id="@+id/build_squad_button"
+        android:layout_below="@+id/view_teams_button"
+        android:layout_alignRight="@+id/view_teams_button"
+        android:layout_alignEnd="@+id/view_teams_button"
         android:layout_marginTop="33dp"
         android:width="90dp"/>
 </RelativeLayout>

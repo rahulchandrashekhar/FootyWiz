@@ -1,9 +1,12 @@
 package com.rahulchandrashekhar.footywiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class WelcomeScreen extends AppCompatActivity {
 
@@ -11,6 +14,24 @@ public class WelcomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
+        setupButtons();
+    }
+
+    private void setupButtons(){
+        Button viewSquads = (Button)findViewById(R.id.view_teams_button);
+        viewSquads.setOnClickListener(new View.OnClickListener(){
+
+                                         @Override
+                                     public void onClick(View v){
+                                             Intent myIntent = new Intent(WelcomeScreen.this, ViewSquadsActivity.class);
+                                             WelcomeScreen.this.startActivity(myIntent);
+                                         }
+                                      }
+        );
+
+        Button buildSquad = (Button)findViewById(R.id.build_squad_button);
+
+
     }
 
     @Override
