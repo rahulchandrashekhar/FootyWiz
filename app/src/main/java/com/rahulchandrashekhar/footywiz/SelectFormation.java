@@ -1,5 +1,6 @@
 package com.rahulchandrashekhar.footywiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,11 +15,15 @@ import android.widget.Toast;
 public class SelectFormation extends AppCompatActivity {
 
     ListView listView;
+    String league=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_formation);
+
+        Intent myIntent = getIntent();
+        league = myIntent.getStringExtra("leagueName");
 
         listView = (ListView) findViewById(R.id.formation_list);
 
@@ -41,8 +46,11 @@ public class SelectFormation extends AppCompatActivity {
 
                 // ListView Clicked item value
                 String itemValue = (String) listView.getItemAtPosition(position);
+                Intent oldIntent = getIntent();
+                String name = oldIntent.getStringExtra("teamName");
 
                 Intent myIntent = new Intent(SelectFormation.this, SquadBuilder.class);
+                myIntent.putExtra("buildName",name);
                 SelectFormation.this.startActivity(myIntent);
 
 
@@ -78,5 +86,18 @@ public class SelectFormation extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onNewIntent (Intent intent) {
+        setIntent(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result",league);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
     }
 }

@@ -1,8 +1,10 @@
 package com.rahulchandrashekhar.footywiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 public class SquadListView extends AppCompatActivity {
 
     ListView listView;
+    String league=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +24,15 @@ public class SquadListView extends AppCompatActivity {
         setContentView(R.layout.activity_squad_list_view);
 
         Intent intent = getIntent();
-        String value = intent.getStringExtra("league");
+        Log.i("gotIntent","got the intent");
+        final String value;
+        value = intent.getStringExtra("league");
+        //if(value==null)
+        //{
+        //    value = savedInstanceState.getString("leagueNameValue");
+        //}
         final String buildOrView = intent.getStringExtra("buildOrView");
+        //Log.i("buildOrV",buildOrView);
 
         listView = (ListView) findViewById(R.id.list);
 
@@ -46,11 +56,15 @@ public class SquadListView extends AppCompatActivity {
 
                 if(buildOrView.equals("view")){
                     Intent myIntent = new Intent(SquadListView.this, SelectedSquadList.class);
-                    SquadListView.this.startActivity(myIntent);
+                    myIntent.putExtra("teamName", itemValue);
+                    myIntent.putExtra("leagueName", value);
+                    SquadListView.this.startActivityForResult(myIntent,1);
                 }
                 else{
                     Intent myIntent = new Intent(SquadListView.this, SelectFormation.class);
-                    SquadListView.this.startActivity(myIntent);
+                    myIntent.putExtra("teamName", itemValue);
+                    myIntent.putExtra("leagueName", value);
+                    SquadListView.this.startActivityForResult(myIntent,1);
                 }
 
 
@@ -72,32 +86,47 @@ public class SquadListView extends AppCompatActivity {
         if(key.equals("england")){
             ret = new String[]{
                     "Arsenal",
-                    "Manchester United"
+                    "Manchester United",
+                    "Chelsea",
+                    "Manchester City",
+                    "Tottenham"
             };
         }
 
         else if (key.equals("germany")){
             ret = new String[]{
                     "Bayern Munich",
-                    "Borussia Dortmund"
+                    "Borussia Dortmund",
+                    "Bayer Leverkusen",
+                    "Borussia Monchengladbach",
+                    "Augsburg"
             };
         }
         else if (key.equals("france")){
             ret = new String[]{
                     "Monaco",
-                    "Paris Saint Germain"
+                    "Paris Saint Germain",
+                    "Saint Etienne",
+                    "Olympique Lyon",
+                    "Olympique Marseille"
             };
         }
         else if (key.equals("spain")){
             ret = new String[]{
                     "Barcelona",
-                    "Real Madrid"
+                    "Real Madrid",
+                    "Valencia",
+                    "Atletico Madrid",
+                    "Sevilla"
             };
         }
         else{
             ret = new String[]{
                     "Benfica",
-                    "Porto"
+                    "Porto",
+                    "Braga",
+                    "Sporting CP",
+                    "Vitoria Guimaraes"
             };
         }
 
@@ -125,4 +154,69 @@ public class SquadListView extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onNewIntent (Intent intent) {
+        setIntent(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+                //Toast.makeText(getApplicationContext(), result , Toast.LENGTH_LONG)
+                        //.show();
+
+                league = result;
+
+                updateUI();
+
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+
+    public void updateUI()
+    {
+        listView = (ListView) findViewById(R.id.list);
+
+        String[] values = getTeamList(league);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+        listView.setAdapter(adapter);
+    }
+
+
 }
