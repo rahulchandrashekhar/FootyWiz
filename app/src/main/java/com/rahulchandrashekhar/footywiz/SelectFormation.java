@@ -31,7 +31,8 @@ public class SelectFormation extends AppCompatActivity {
                 "4-4-2",
                 "4-1-2-1-2",
                 "5-3-2",
-                "4-3-3"
+                "4-3-3",
+                "3-5-2"
         };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);

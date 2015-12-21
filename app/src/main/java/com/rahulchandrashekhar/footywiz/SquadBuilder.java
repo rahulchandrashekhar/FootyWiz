@@ -1,11 +1,17 @@
 package com.rahulchandrashekhar.footywiz;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.app.NotificationCompat.Builder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +30,8 @@ import java.util.Date;
 public class SquadBuilder extends AppCompatActivity {
 
     Button updateButton = null;
+    //NotificationCompat.Builder notification;
+    //NotificationManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +53,13 @@ public class SquadBuilder extends AppCompatActivity {
         {
             setContentView(R.layout.formation_41212);
         }
-        else
+        else if(formation.equals("5-3-2"))
         {
             setContentView(R.layout.formation_532);
+        }
+        else
+        {
+            setContentView(R.layout.formation_352);
         }
 
         setTitle(naam);
@@ -236,12 +248,21 @@ public class SquadBuilder extends AppCompatActivity {
                 Button button = (Button)v;
                 button.setVisibility(View.INVISIBLE);
                 Bitmap bitmap = takeScreenshot();
-                saveBitmap(bitmap);
+                saveBitmap(bitmap, naam);
                 button.setVisibility(View.VISIBLE);
 
-
-
             }
+
+            protected void viewNotification() {
+                NotificationCompat.Builder notification = new Builder(getApplicationContext());
+                notification.setContentTitle("Squad saved!");
+                notification.setContentText("Click to view!");
+                notification.setTicker("Saving your squad!");
+                NotificationManager manager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(1, notification.build());
+            }
+
+
         });
     }
 
@@ -279,15 +300,15 @@ public class SquadBuilder extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("result");
-                Toast.makeText(getApplicationContext(), result , Toast.LENGTH_LONG)
-                        .show();
+                /*Toast.makeText(getApplicationContext(), result , Toast.LENGTH_LONG)
+                        .show();*/
                 String[] mTemp = result.split(" ");
 
                 updateButton.setText(mTemp[mTemp.length-1]);
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+                //no result
             }
         }
     }
@@ -322,14 +343,22 @@ public class SquadBuilder extends AppCompatActivity {
         return rootView.getDrawingCache();
     }
 
-    public void saveBitmap(Bitmap bitmap) {
+    public void saveBitmap(Bitmap bitmap, String team) {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
 // Get the date today using Calendar object.
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
         Log.i("appDate",reportDate);
-        File imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
+        Calendar c = Calendar.getInstance();
+        int seconds = c.get(Calendar.SECOND);
+        int date = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+        int year = c.get(Calendar.YEAR);
+        int minutes = c.get(Calendar.MINUTE);
+        String secs = "/"+team+Integer.toString(month)+Integer.toString(date)+Integer.toString(year)+Integer.toString(hours)+Integer.toString(minutes)+Integer.toString(seconds)+"screenshot.png";
+        File imagePath = new File(Environment.getExternalStorageDirectory() + secs);
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imagePath);
@@ -337,7 +366,7 @@ public class SquadBuilder extends AppCompatActivity {
             fos.flush();
             fos.close();
         } catch (Exception e) {
-            Log.e("GREC", e.getMessage(), e);
+            Log.e("Err", e.getMessage(), e);
         }
     }
 

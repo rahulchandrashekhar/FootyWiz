@@ -102,7 +102,6 @@ public class SelectedSquadList extends AppCompatActivity {
                 String itemValue = (String) listView.getItemAtPosition(position);
 
                 Intent myIntent = getIntent();
-                //String temp = myIntent.getStringExtra("teamNaam");
                 String buildT = myIntent.getStringExtra("toBuild");
                 if(buildT!=null && buildT.equals("true"))
                 {
@@ -111,10 +110,11 @@ public class SelectedSquadList extends AppCompatActivity {
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
                 }
+                /*
 
                 Toast.makeText(getApplicationContext(),
                         "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                        .show();
+                        .show();*/
 
 
             }
