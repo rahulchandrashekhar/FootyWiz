@@ -26,7 +26,16 @@ public class SquadListView extends AppCompatActivity {
         Intent intent = getIntent();
         Log.i("gotIntent","got the intent");
         final String value;
-        value = intent.getStringExtra("league");
+        //value = intent.getStringExtra("league");
+        String result = intent.getStringExtra("result");
+        if(result!=null)
+        {
+            value = result;
+        }
+        else
+        {
+            value = intent.getStringExtra("league");
+        }
         //if(value==null)
         //{
         //    value = savedInstanceState.getString("leagueNameValue");

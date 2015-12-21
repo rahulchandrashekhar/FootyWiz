@@ -28,7 +28,10 @@ public class SelectFormation extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.formation_list);
 
         String[] values = new String[]{
-                "4-4-2"
+                "4-4-2",
+                "4-1-2-1-2",
+                "5-3-2",
+                "4-3-3"
         };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -51,6 +54,7 @@ public class SelectFormation extends AppCompatActivity {
 
                 Intent myIntent = new Intent(SelectFormation.this, SquadBuilder.class);
                 myIntent.putExtra("buildName",name);
+                myIntent.putExtra("formationName",itemValue);
                 SelectFormation.this.startActivity(myIntent);
 
 

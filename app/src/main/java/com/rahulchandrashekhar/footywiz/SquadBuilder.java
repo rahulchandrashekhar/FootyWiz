@@ -2,13 +2,24 @@ package com.rahulchandrashekhar.footywiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class SquadBuilder extends AppCompatActivity {
 
@@ -17,10 +28,30 @@ public class SquadBuilder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_squad_builder);
+        //setContentView(R.layout.activity_squad_builder);
 
         Intent myIntent = getIntent();
         final String naam = myIntent.getStringExtra("buildName");
+        String formation = myIntent.getStringExtra("formationName");
+        if(formation.equals("4-4-2"))
+        {
+            setContentView(R.layout.formation_442);
+        }
+        else if(formation.equals("4-3-3"))
+        {
+            setContentView(R.layout.formation_4331);
+        }
+        else if(formation.equals("4-1-2-1-2"))
+        {
+            setContentView(R.layout.formation_41212);
+        }
+        else
+        {
+            setContentView(R.layout.formation_532);
+        }
+
+        setTitle(naam);
+
 
         final Button player_1 = (Button)findViewById(R.id.player_1);
 
@@ -195,10 +226,19 @@ public class SquadBuilder extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 Toast.makeText(getApplicationContext(),
-                        "Functionality to be added", Toast.LENGTH_LONG)
+                        "Saving file...", Toast.LENGTH_LONG)
                         .show();
+
+                //View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+                //store(getScreenShot(rootView),"myteam");
+                Button button = (Button)v;
+                button.setVisibility(View.INVISIBLE);
+                Bitmap bitmap = takeScreenshot();
+                saveBitmap(bitmap);
+                button.setVisibility(View.VISIBLE);
+
 
 
             }
@@ -249,6 +289,55 @@ public class SquadBuilder extends AppCompatActivity {
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
+        }
+    }
+
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    public static void store(Bitmap bm, String fileName){
+        String dir1 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Screenshots";
+        File dir = new File(dir1);
+        if(!dir.exists())
+            dir.mkdirs();
+        File file = new File(dir, fileName);
+        try {
+            FileOutputStream fOut = new FileOutputStream(file);
+            bm.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap takeScreenshot() {
+        View rootView = findViewById(android.R.id.content).getRootView();
+        rootView.setDrawingCacheEnabled(true);
+        return rootView.getDrawingCache();
+    }
+
+    public void saveBitmap(Bitmap bitmap) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+// Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();
+        String reportDate = df.format(today);
+        Log.i("appDate",reportDate);
+        File imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(imagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            Log.e("GREC", e.getMessage(), e);
         }
     }
 
